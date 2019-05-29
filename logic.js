@@ -1,6 +1,6 @@
 // define earthquake and plate url 
 var quakeUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojson"
-var API_plates = "https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_boundaries.json"
+var API_plates = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
 
 // create layer group
 var earthquakes = new L.LayerGroup();
@@ -24,8 +24,8 @@ d3.json(quakeUrl, function (geoJson) {
         // create popups with more information on the earth quakes
         onEachFeature: function (feature, layer) {
             layer.bindPopup(
-                "<h4 style='text-align:center;'>" + new Date(feature.properties.time) +
-                "</h4> <hr> <h5 style='text-align:center;'>" + feature.properties.title + "</h5>");
+                "<h4 style='text-align:center;'>Location: " + feature.properties.place +
+                "</h4><h4 style='text-align:center;'>Magnitude: " + feature.properties.mag + "</h4>");
         }
     }).addTo(earthquakes);
     createMap(earthquakes);
